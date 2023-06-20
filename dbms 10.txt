@@ -1,0 +1,120 @@
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
+| studentdetails    |
+| studentnumber     |
+| studept           |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
+|     6 | muna    | eee     |  23000 | gudur      |       92 | pdsd       |
+|     7 | shiva   | cse     |  33000 | kupam      |       82 | pdsd       |
++-------+---------+---------+--------+------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> create view marks_view as select studubject,marks from student;
+ERROR 1054 (42S22): Unknown column 'marks' in 'field list'
+mysql> create view marks_view as select studubject,stumarks from student;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select*from marks_view;
++------------+----------+
+| studubject | stumarks |
++------------+----------+
+| dbms       |       90 |
+| pom        |       98 |
+| dbms       |       90 |
+| dbms       |       89 |
+| tqm        |       95 |
+| pdsd       |       92 |
+| pdsd       |       82 |
++------------+----------+
+7 rows in set (0.00 sec)
+
+mysql> create index from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from student' at line 1
+mysql> create index studubject on student(studubject);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show index student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'student' at line 1
+mysql> show index from student;
++---------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table   | Non_unique | Key_name   | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++---------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| student |          0 | PRIMARY    |            1 | stuid       | A         |           7 |     NULL | NULL   |      | BTREE      |         |
+ |
+| student |          0 | stuid      |            1 | stuid       | A         |           7 |     NULL | NULL   |      | BTREE      |         |
+ |
+| student |          1 | studubject |            1 | studubject  | A         |           7 |     NULL | NULL   | YES  | BTREE      |         |
+ |
++---------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+3 rows in set (0.05 sec)
+
+mysql> create table per(pid int NOT NULL AUTO_INCREMENT,name varchar(50),age int(3),primary key(pid));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc per;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| pid   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(50) | YES  |     | NULL    |                |
+| age   | int(3)      | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.03 sec)
+
+mysql> alter table per AUTO_INCREMENT=100;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO PER(NAME,AGE) VALUES ("AJAY",20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO PER(NAME,AGE) VALUES ("SHIVA",20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO PER(NAME,AGE) VALUES ("THAISH",20);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO PER(NAME,AGE) VALUES ("SAI",20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO PER(NAME,AGE) VALUES ("KARTHIK",20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO PER(NAME,AGE) VALUES ("PRAVEEN",20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO PER(NAME,AGE) VALUES ("RAJESH",20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT*FROM PER;
++-----+---------+------+
+| pid | name    | age  |
++-----+---------+------+
+| 100 | AJAY    |   20 |
+| 101 | SHIVA   |   20 |
+| 102 | THAISH  |   20 |
+| 103 | SAI     |   20 |
+| 104 | KARTHIK |   20 |
+| 105 | PRAVEEN |   20 |
+| 106 | RAJESH  |   20 |
++-----+---------+------+
+7 rows in set (0.00 sec)
+
+mysql>

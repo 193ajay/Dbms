@@ -1,0 +1,141 @@
+
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
+| studentdetails    |
+| studentnumber     |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+
+| stuid | stuname | studept | salary | stuaddress | stumarks |
++-------+---------+---------+--------+------------+----------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 |
++-------+---------+---------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql>  alter table student add studubject varchsr(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchsr(20)' at line 1
+mysql>  alter table student add studubject varchar(20);
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select from studnet;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from studnet' at line 1
+mysql> select*from studnet;
+ERROR 1146 (42S02): Table 'student.studnet' doesn't exist
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | NULL       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | NULL       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | NULL       |
++-------+---------+---------+--------+------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update student set studuject="dbms" where stuid=1;
+ERROR 1054 (42S22): Unknown column 'studuject' in 'field list'
+mysql> update student set studubject="dbms" where stuid=1;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set studubject="dbms" where stuid=3;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set studubject="dbms" where stuid=4;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
++-------+---------+---------+--------+------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student where stumarks BETWEEN 89 and 90;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
++-------+---------+---------+--------+------------+----------+------------+
+3 rows in set (0.05 sec)
+
+mysql> select*from student where studuject in("dbms");
+ERROR 1054 (42S22): Unknown column 'studuject' in 'where clause'
+mysql> select*from student where studubject in("dbms");
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
++-------+---------+---------+--------+------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student where stumarks=90;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
++-------+---------+---------+--------+------------+----------+------------+
+2 rows in set (0.01 sec)
+
+mysql> select sum(marks) from student where studept="cse";
+ERROR 1054 (42S22): Unknown column 'marks' in 'field list'
+mysql> select sum(stumarks) from student where studept="cse";
++---------------+
+| sum(stumarks) |
++---------------+
+|           179 |
++---------------+
+1 row in set (0.05 sec)
+
+mysql> select sum(stumarks) from student where stuaddress="kadapa";
++---------------+
+| sum(stumarks) |
++---------------+
+|           179 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(stumarks) as average from student;
++---------+
+| average |
++---------+
+| 89.6667 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select min(stumarks) as minimum from student;
++---------+
+| minimum |
++---------+
+|      89 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select max(stumarks) as maximum from student;
++---------+
+| maximum |
++---------+
+|      90 |
++---------+
+1 row in set (0.00 sec)
+
+mysql>

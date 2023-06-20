@@ -1,0 +1,137 @@
+sql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
+| studentdetails    |
+| studentnumber     |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from studnet;
+ERROR 1146 (42S02): Table 'student.studnet' doesn't exist
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
++-------+---------+---------+--------+------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into student values(2,"eee",67900,"kadapa",98,"pom";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> insert into student values(2,"eee",67900,"kadapa",98,"pom");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into student values(2,"alex","eee",67900,"kadapa",98,"pom");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into student values(5,"bhanu","ece",43900,"kadapa",95,"tqm");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into student values(6,"muna","eee",23000,"gudur",92,"pdsd");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values(7,"shiva","cse",33000,"kupam",82,"pdsd");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
+|     6 | muna    | eee     |  23000 | gudur      |       92 | pdsd       |
+|     7 | shiva   | cse     |  33000 | kupam      |       82 | pdsd       |
++-------+---------+---------+--------+------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select*from student order by name;
+ERROR 1054 (42S22): Unknown column 'name' in 'order clause'
+mysql> select*from student order by stuname;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
+|     6 | muna    | eee     |  23000 | gudur      |       92 | pdsd       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     7 | shiva   | cse     |  33000 | kupam      |       82 | pdsd       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
++-------+---------+---------+--------+------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select*from student order by stumarks;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     7 | shiva   | cse     |  33000 | kupam      |       82 | pdsd       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     6 | muna    | eee     |  23000 | gudur      |       92 | pdsd       |
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
++-------+---------+---------+--------+------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select*from student group by studept;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
++-------+---------+---------+--------+------------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student group by stumarks;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     7 | shiva   | cse     |  33000 | kupam      |       82 | pdsd       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     6 | muna    | eee     |  23000 | gudur      |       92 | pdsd       |
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
++-------+---------+---------+--------+------------+----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select*from student having stumarks<95;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
+|     6 | muna    | eee     |  23000 | gudur      |       92 | pdsd       |
+|     7 | shiva   | cse     |  33000 | kupam      |       82 | pdsd       |
++-------+---------+---------+--------+------------+----------+------------+
+5 rows in set (0.05 sec)
+
+mysql> select*from student having stumarks>95;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
++-------+---------+---------+--------+------------+----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select*from student having stumarks=90;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
++-------+---------+---------+--------+------------+----------+------------+
+2 rows in set (0.00 sec)
+
+mysql>

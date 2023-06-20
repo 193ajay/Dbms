@@ -1,0 +1,115 @@
+mysql> create database student;
+ERROR 1007 (HY000): Can't create database 'student'; database exists
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
++-------------------+
+1 row in set (0.03 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| stuid   | int(20)     | YES  |     | NULL    |       |
+| stuname | varchar(20) | YES  |     | NULL    |       |
+| studept | varchar(10) | YES  |     | NULL    |       |
+| salary  | int(20)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> create table studentdetails(stuid int(20),stuname varchar(20),stufathername varchar(20));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table studentnumber;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table studentnumber(stuid int(20),stuphonumber int(20),stufatherno int(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tabless;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabless' at line 1
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
+| studentdetails    |
+| studentnumber     |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| stuid   | int(20)     | YES  |     | NULL    |       |
+| stuname | varchar(20) | YES  |     | NULL    |       |
+| studept | varchar(10) | YES  |     | NULL    |       |
+| salary  | int(20)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> alter table student add stuaddress varchar(20);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| stuid      | int(20)     | YES  |     | NULL    |       |
+| stuname    | varchar(20) | YES  |     | NULL    |       |
+| studept    | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(20)     | YES  |     | NULL    |       |
+| stuaddress | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+mysql> insert into student values(1,"ajay","cse",23000,"kurnool");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values (2,"karthik","eee",23400,"nandyal");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values(3,"sai","eee",43200,"kadapa";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> insert into student values(3,"sai","eee",43200,"kadapa");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+
+| stuid | stuname | studept | salary | stuaddress |
++-------+---------+---------+--------+------------+
+|     1 | ajay    | cse     |  23000 | kurnool    |
+|     2 | karthik | eee     |  23400 | nandyal    |
+|     3 | sai     | eee     |  43200 | kadapa     |
++-------+---------+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> insert into student values(1,"ajay","cse",23000,"kurnool");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values (2,"karthik","eee",23400,"nandyal");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert in

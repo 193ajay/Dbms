@@ -1,0 +1,81 @@
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
+| studentdetails    |
+| studentnumber     |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| stuid      | int(20)     | YES  |     | NULL    |       |
+| stuname    | varchar(20) | YES  |     | NULL    |       |
+| studept    | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(20)     | YES  |     | NULL    |       |
+| stuaddress | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+mysql> desc studentdetails;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| stuid         | int(20)     | YES  |     | NULL    |       |
+| stuname       | varchar(20) | YES  |     | NULL    |       |
+| stufathername | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+3 rows in set (0.05 sec)
+
+mysql> alter table student add primary key(stuid);
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| stuid      | int(20)     | NO   | PRI | 0       |       |
+| stuname    | varchar(20) | YES  |     | NULL    |       |
+| studept    | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(20)     | YES  |     | NULL    |       |
+| stuaddress | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> alter table studentdetails add foreign key(stuid) references student(stuid);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc studentdetails;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| stuid         | int(20)     | YES  | MUL | NULL    |       |
+| stuname       | varchar(20) | YES  |     | NULL    |       |
+| stufathername | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> alter table student add unique key(stuid);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| stuid      | int(20)     | NO   | PRI | 0       |       |
+| stuname    | varchar(20) | YES  |     | NULL    |       |
+| studept    | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(20)     | YES  |     | NULL    |       |
+| stuaddress | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql>

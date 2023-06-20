@@ -1,0 +1,69 @@
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
+| studentdetails    |
+| studentnumber     |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
+|     6 | muna    | eee     |  23000 | gudur      |       92 | pdsd       |
+|     7 | shiva   | cse     |  33000 | kupam      |       82 | pdsd       |
++-------+---------+---------+--------+------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select stuid,stuname from student where stuname IN(select stuname from student where studept="cse");
++-------+---------+
+| stuid | stuname |
++-------+---------+
+|     1 | ajay    |
+|     4 | varun   |
+|     7 | shiva   |
++-------+---------+
+3 rows in set (0.01 sec)
+
+mysql> select stuid,stuname from student where stuname IN(select stuname from student where studept="eee");
++-------+---------+
+| stuid | stuname |
++-------+---------+
+|     2 | alex    |
+|     3 | sai     |
+|     6 | muna    |
++-------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 | dbms       |
+|     2 | alex    | eee     |  67900 | kadapa     |       98 | pom        |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 | dbms       |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 | dbms       |
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
+|     6 | muna    | eee     |  23000 | gudur      |       92 | pdsd       |
+|     7 | shiva   | cse     |  33000 | kupam      |       82 | pdsd       |
++-------+---------+---------+--------+------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select stuid,(select stuname from student where stuid=5)as stuname,studept,salary,stuaddress,stumarks,studubject from student where stuid=5;
++-------+---------+---------+--------+------------+----------+------------+
+| stuid | stuname | studept | salary | stuaddress | stumarks | studubject |
++-------+---------+---------+--------+------------+----------+------------+
+|     5 | bhanu   | ece     |  43900 | kadapa     |       95 | tqm        |
++-------+---------+---------+--------+------------+----------+------------+
+1 row in set (0.05 sec)
+
+mysql>

@@ -1,0 +1,143 @@
+mysql> use student;
+Database changed
+mysql> create table studept(deptid int(20),deptname varchar(20),stuid int(20));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into studept valuesd(12,"cse",1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'valuesd(12,"cse",1)' at line 1
+mysql> insert into studept values(12,"cse",1);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into studept values(13,"eee",2);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into studept values(13,"eee",3);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into studept values(13,"cse",4);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into studept values(13,"ece",5);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into studept values(13,"eee",6);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into studept values(13,"cse",7);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from studept;
++--------+----------+-------+
+| deptid | deptname | stuid |
++--------+----------+-------+
+|     12 | cse      |     1 |
+|     13 | eee      |     2 |
+|     13 | eee      |     3 |
+|     13 | cse      |     4 |
+|     13 | ece      |     5 |
+|     13 | eee      |     6 |
+|     13 | cse      |     7 |
++--------+----------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update studept set deptname="ece" where stuid=7;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from studept;
++--------+----------+-------+
+| deptid | deptname | stuid |
++--------+----------+-------+
+|     12 | cse      |     1 |
+|     13 | eee      |     2 |
+|     13 | eee      |     3 |
+|     13 | cse      |     4 |
+|     13 | ece      |     5 |
+|     13 | eee      |     6 |
+|     13 | ece      |     7 |
++--------+----------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select deptid,deptname,stuid from studept,student where student stuid=studept.stuid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'stuid=studept.stuid' at line 1
+mysql> select deptid,deptname,stuid from studept,student where student.stuid=studept.stuid;
+ERROR 1052 (23000): Column 'stuid' in field list is ambiguous
+mysql> select deptid,deptname from studept,student where student.stuid=studept.stuid;
++--------+----------+
+| deptid | deptname |
++--------+----------+
+|     12 | cse      |
+|     13 | eee      |
+|     13 | eee      |
+|     13 | cse      |
+|     13 | ece      |
+|     13 | eee      |
+|     13 | ece      |
++--------+----------+
+7 rows in set (0.00 sec)
+
+mysql> select deptid from studept,student where student.stuid=studept.stuid;
++--------+
+| deptid |
++--------+
+|     12 |
+|     13 |
+|     13 |
+|     13 |
+|     13 |
+|     13 |
+|     13 |
++--------+
+7 rows in set (0.00 sec)
+
+mysql> select stuid,deptnsme,stuname,stuaddress from studept right outer join student on studept.stuid=student.stuid;
+ERROR 1052 (23000): Column 'stuid' in field list is ambiguous
+mysql> select stuid,deptnsme,stuname,stuaddress from studept right outer join student on studept.stuid=student.stumarks;
+ERROR 1052 (23000): Column 'stuid' in field list is ambiguous
+mysql> select stuid,deptnsme,stuname,stuaddress from studept right outer join student on studept.deptid=student.stumarks;
+ERROR 1052 (23000): Column 'stuid' in field list is ambiguous
+mysql> select deptnsme,stuname,stuaddress from studept right outer join student on studept.stuid=student.stuid;
+ERROR 1054 (42S22): Unknown column 'deptnsme' in 'field list'
+mysql> select deptname,stuname,stuaddress from studept right outer join student on studept.stuid=student.stuid;
++----------+---------+------------+
+| deptname | stuname | stuaddress |
++----------+---------+------------+
+| cse      | ajay    | kurnool    |
+| eee      | alex    | kadapa     |
+| eee      | sai     | kadapa     |
+| cse      | varun   | kadapa     |
+| ece      | bhanu   | kadapa     |
+| eee      | muna    | gudur      |
+| ece      | shiva   | kupam      |
++----------+---------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select deptname from studept,student where student.stuid=studept.stuid;
++----------+
+| deptname |
++----------+
+| cse      |
+| eee      |
+| eee      |
+| cse      |
+| ece      |
+| eee      |
+| ece      |
++----------+
+7 rows in set (0.00 sec)
+
+mysql> select deptname,stuname,stuaddress from studept right outer join student on studept.stuid=student.stuid;
++----------+---------+------------+
+| deptname | stuname | stuaddress |
++----------+---------+------------+
+| cse      | ajay    | kurnool    |
+| eee      | alex    | kadapa     |
+| eee      | sai     | kadapa     |
+| cse      | varun   | kadapa     |
+| ece      | bhanu   | kadapa     |
+| eee      | muna    | gudur      |
+| ece      | shiva   | kupam      |
++----------+---------+------------+
+7 rows in set (0.00 sec)
+
+mysql>

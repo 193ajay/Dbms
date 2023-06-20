@@ -1,0 +1,129 @@
+ysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| student           |
+| studentdetails    |
+| studentnumber     |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc studebt;
+ERROR 1146 (42S02): Table 'student.studebt' doesn't exist
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| stuid      | int(20)     | NO   | PRI | 0       |       |
+| stuname    | varchar(20) | YES  |     | NULL    |       |
+| studept    | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(20)     | YES  |     | NULL    |       |
+| stuaddress | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+
+| stuid | stuname | studept | salary | stuaddress |
++-------+---------+---------+--------+------------+
+|     1 | ajay    | cse     |  23000 | kurnool    |
+|     2 | karthik | eee     |  23400 | nandyal    |
+|     3 | sai     | eee     |  43200 | kadapa     |
++-------+---------+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update student set salary=40000 where stuname="ajay";
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+
+| stuid | stuname | studept | salary | stuaddress |
++-------+---------+---------+--------+------------+
+|     1 | ajay    | cse     |  40000 | kurnool    |
+|     2 | karthik | eee     |  23400 | nandyal    |
+|     3 | sai     | eee     |  43200 | kadapa     |
++-------+---------+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student add stumarks int(20);
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| stuid      | int(20)     | NO   | PRI | 0       |       |
+| stuname    | varchar(20) | YES  |     | NULL    |       |
+| studept    | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(20)     | YES  |     | NULL    |       |
+| stuaddress | varchar(20) | YES  |     | NULL    |       |
+| stumarks   | int(20)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+6 rows in set (0.03 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+
+| stuid | stuname | studept | salary | stuaddress | stumarks |
++-------+---------+---------+--------+------------+----------+
+|     1 | ajay    | cse     |  40000 | kurnool    |     NULL |
+|     2 | karthik | eee     |  23400 | nandyal    |     NULL |
+|     3 | sai     | eee     |  43200 | kadapa     |     NULL |
++-------+---------+---------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update student set stumarks=90 where stuname="ajay";
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set stumarks=90 where stuname="karthik";
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set stumarks=90 where stuname="sai";
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+
+| stuid | stuname | studept | salary | stuaddress | stumarks |
++-------+---------+---------+--------+------------+----------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 |
+|     2 | karthik | eee     |  23400 | nandyal    |       90 |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 |
++-------+---------+---------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into student values(1,"varun","ces",46000,"kadapa",89));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into student values(4,"varun","cse",46000,"kadapa",89);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+
+| stuid | stuname | studept | salary | stuaddress | stumarks |
++-------+---------+---------+--------+------------+----------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 |
+|     2 | karthik | eee     |  23400 | nandyal    |       90 |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 |
++-------+---------+---------+--------+------------+----------+
+4 rows in set (0.01 sec)
+
+mysql> delete from student where stuname="karthik";
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from student;
++-------+---------+---------+--------+------------+----------+
+| stuid | stuname | studept | salary | stuaddress | stumarks |
++-------+---------+---------+--------+------------+----------+
+|     1 | ajay    | cse     |  40000 | kurnool    |       90 |
+|     3 | sai     | eee     |  43200 | kadapa     |       90 |
+|     4 | varun   | cse     |  46000 | kadapa     |       89 |
++-------+---------+---------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql>
